@@ -43,6 +43,7 @@ minor file savings.
 .example {
   background: url(//www.photobox.com/images/logo.png) 
 }
+```
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -101,7 +102,7 @@ function() {
 (function() {
   myAwsomeModule();  
 })();
-
+↵
 ```
 
 **[⬆ back to top](#table-of-contents)**
