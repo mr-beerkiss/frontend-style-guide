@@ -4,17 +4,17 @@
 
 ## Table of Contents
 
-  1.  [Document Type](#doctype)
-  1.  [HTML Validity](#validity)
+  1.  [Document Type](#document-type)
+  1.  [HTML Validity](#html-validity)
   1.  [Semantics](#semantics)
-  1.  [Multimedia fallback](#media-fallback)
+  1.  [Multimedia fallback](#multimedia-fallbacks)
   1.  [Separation of Concerns](#separation-of-concerns)
   1.  [Entity References](#entities)
   1.  [type Attributes](#type-atttributes)
   1.  [Void elements](#void-elements)
-  1.  [HTML formatting](#formatting)
+  1.  [HTML formatting](#html-formatting)
   1.  [Capitalisation](#capitalisation)
-  1.  [Quotation Marks](#quotation)
+  1.  [Quotation Marks](#quotation-marks)
 
 ## Document Type
 
@@ -157,4 +157,109 @@ The `type` attribute can be safely ommited for older browsers.
 ```
 
 **[⬆ back to top](#table-of-contents)**
+
+## Void Elements
+
+- [8](8) <a href="8"></a> Although fine with HTML, do not void close elements.
+
+```html
+<!-- Bad -->
+<br/>
+
+<!-- Good -->
+<br>
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+## HTML formatting
+
+- [8](8) <a href="9"></a> Put every block, list or table element on a new line and indent as such for every child element.  In-line elements should _not_ be placed on a new line, even for readibility purposes since new lines have special meaning in HTML.
+
+These rules _MUST_ be applied regardless of any styling that may change the role of an element via the `display` property.
+
+The only exception is to put `<li>` elements onto one line if you encounter issues with whitespace around a list.
+
+```html
+<!-- Bad -->
+<div class="outer"><div class="inner">
+<span>
+  Some text
+  <em>emphasied text</em>
+</span>
+</div></div>
+
+<!-- Good -->
+<div class="outer">
+  <div class="inner"><span>Some text <em>emphasied text</em></span></div>
+</div>
+
+<!-- Bad -->
+<table><thead>
+  <tr><th scope="col">Date</th><th scope="col">Amount</th></tr></thead>
+  <tbody>
+    <tr><td>12/06/2025</td><td>£5.00</td></tr>
+  </tbody>
+</table>
+
+<!-- Good -->
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>12/06/2025</td>
+      <td>£5.00</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- This is bad, but acceptable if you are facing issues with white space -->
+<ul><li>Apples</li><li>Bananas</li><li>Oranges</li></ul>
+
+<!-- Better -->
+<ul>
+  <li>Apples</li>
+  <li>Bananas</li>
+  <li>Oranges</li>
+</ul>
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+# Capitalisation
+
+- [9](9) <a href="9"></a>  All code _must_ be lowercase.  This applies to HTML element names, attributes, attribute values (unless `text/CDATA`).  Obviously this doesn't apply to the content of elements or string values.
+
+This rule applies to how CSS selectors are used to defined ids and classes.  See the [CSS section](../css) for more details.
+
+```html
+<!--Bad -->
+<A Class="link" HREF="/">Home</A>
+
+<!-- Good -->
+<a class="link" href="/">Home</a>
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+# Quotation Marks
+
+- [10](10) <a href="10"></a> Always use double (`""`) rather than single quotes for HTML attributes (`''`)
+
+```html
+<!-- Bad -->
+<a class='link' href='/'>Home</a>
+
+<!-- Good -->
+<a class="link" href="/">Home</a>
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+
 
