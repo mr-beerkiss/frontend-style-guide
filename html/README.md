@@ -1,0 +1,1 @@
+# Photobox HTML styleguide

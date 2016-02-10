@@ -1,7 +1,7 @@
 {
-  "name": "airbnb-style",
-  "version": "2.0.0",
-  "description": "A mostly reasonable approach to JavaScript.",
+  "name": "front-end-stle",
+  "version": "1.0.0",
+  "description": "A mostly stolen guide to front-end.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish-all": "npm publish && cd ./packages/eslint-config-airbnb && npm publish"
