@@ -1,4 +1,4 @@
-# Airbnb CSS / Sass Styleguide
+# Photobox CSS / Sass Styleguide
 
 *A mostly reasonable approach to CSS and Sass*
 
@@ -9,7 +9,14 @@
     - [Selectors](#selectors)
     - [Properties](#properties)
   1. [CSS](#css)
+    - [Validity](#validity)
+    - [Shorthand Properties](#shorthand-properties)
+    - [0 and Units](#zero-and-units)
+    - [Leading 0s](#leading-zeros)
+    - [Hexidecimal Noation](#hexidecimal Notation)
+    - [Declaration Order](#declaration-order)
     - [Formatting](#formatting)
+    - [Quotation Marks](#quotation-marks)
     - [Comments](#comments)
     - [OOCSS and BEM](#oocss-and-bem)
     - [ID Selectors](#id-selectors)
@@ -20,6 +27,9 @@
     - [Mixins](#mixins)
     - [Extend directive](#extend-directive)
     - [Nested selectors](#nested-selectors)
+  1. [Parting Notes](#parting-notes)
+    - [Hacks](#hacks)
+    - [Consistency](#consistency)
 
 ## Terminology
 
@@ -61,6 +71,109 @@ Finally, properties are what give the selected elements of a rule declaration th
 
 ## CSS
 
+### Validity
+
+Always use valid CSS where possible.  Use tools such as the [W3C CSS validator](http://jigsaw.w3.org/css-validator/) to validate your CSS.
+
+It permitted to break validator when working around validator bugs or when you require proprietary syntax.
+
+Valid CSS ensures proper CSS usage and allows the ability to spot CSS that has no effect so that it may be removed.
+
+### Shorthand Properties
+
+CSS offers a variety of [shorthand](http://www.w3.org/TR/CSS21/about.html#shorthand) properties (like `font`) that should be used whenever possible, even in cases when only one value is set.
+
+Shorthand properties are useful for code efficiency and understandability.  They also make add new properties easy since the long-hand properties will not need to be rewritten.
+
+```css
+/* Bad */
+font-family: Arial, sans-serif;
+font-size: 100%;
+line-height: 1.6;
+padding-bottom: 2em;
+padding-left: 1em;
+padding-right: 1em;
+padding-top: 0;
+
+/* Good */
+font: 100%/1.6 Arial, sans-serif;
+padding: 0 1em 2em;
+```
+
+### 0 and Units
+
+Do not use units after `0` values.
+
+```css
+/* Bad */
+margin: 0em;
+padding: 0px;
+
+/* Good */
+margin: 0;
+padding: 0;
+```
+
+### Leading 0s
+
+Do not place a leading `0` in front of values or lengths between -1 and 1
+
+```css
+/* Bad */
+font-size: 0.8em;
+margin-left: -0.5em;
+
+/* Good */
+font-size: .8em;
+margin-left: -.5em;
+```
+
+### Hexidecimal Notation
+
+- Always write hexidecimal numbers in lower case
+- Use 3 character notation when possible
+
+```css
+/* Bad */
+color: #FEABCD;
+
+/* Good */
+color: #feabcd;
+
+/* Bad */
+color: #ffffff;
+
+/* Good */
+color: #fff
+```
+
+### Declaration order
+
+Put your property declarations in alphabetical order, with the exception of properties which contain vendor-specific prefixes, which should be ordered according to the property to which they prefix and then in alphabetical order of the prefixes (ie `-moz` comes before `-webkit`)  
+
+This rule does not apply to Sass directives which should be specified after the built-in CSS property types.  See Sass [Ordering](#ordering-of-property-declarations) for details
+
+```css
+/* Bad */
+margin: 0 auto;
+font: 1em bold;
+color: green;
+-webkit-boder-radius: 4px;
+border-radius: 4px;
+-moz-border-radius: 4px;
+
+/* Good */
+border-radius: 4px;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+color: green;
+font: 1em bold;
+margin: 0 auto;
+```
+
+*NOTE* Vendor prefixes should never be used in plain CSS.  Use a `@mixin` where possible or better yet make use of an [`autoprefixer`](https://github.com/postcss/autoprefixer)
+
+
 ### Formatting
 
 * Use soft tabs (2 spaces) for indentation
@@ -100,6 +213,24 @@ Finally, properties are what give the selected elements of a rule declaration th
   // ...
 }
 ```
+
+### Quotation Marks
+
+Use single quotes (`''`) rather than double quotes (`""`) for attribute selectors and property values.  _Do not_ use quotation marks in URI values (even url())
+
+Exception: If you need to se the `@charset` rule, then use double quotation marks as [single quotation marks are not permitted](http://www.w3.org/TR/CSS21/syndata.html#charset).
+
+```css
+/* Bad */
+background: url("//www.photobox.co.uk/images/logo.png");
+font-family: "open sans", arial, sans-serif;
+
+/* Good */
+background: url(//www.photobox.co.uk/images/logo.png);
+font-family: 'open sans', arial, sans-serif;
+```
+
+*NOTE* Remember that URIs should omit the protocol (`http:`, `https:`) where possible as specified in the [General guidelines](../)
 
 ### Comments
 
@@ -251,3 +382,18 @@ When selectors become this long, you're likely writing CSS that is:
 Again: **never nest ID selectors!**
 
 If you must use an ID selector in the first place (and you should really try not to), they should never be nested. If you find yourself doing this, you need to revisit your markup, or figure out why such strong specificity is needed. If you are writing well formed HTML and CSS, you should **never** need to do this.
+
+
+## Parting Notes
+
+### Hacks
+
+Avoid using hacks where possible and only revert to one when it is your absolute last option.  The problem when you introduce a hack is that you set a standard that makes it okay for other people to use similar hacks.  
+
+If you must, make clear in the code comments why this hack was used and what could potentially be done in future to remove the hack.
+
+This is particularly important to instances of `position: absolute` and over use of the `z-index` property.
+
+### Consistency
+
+Be _consistent_.  When you're working on code that you didn't write, take some time to look around and determine the style of the code and adapt the changes you are making to reflect the overall style.  While it is important that these guidelines are followed for _new_ code, there is still older code to maintain and in these instances it is important not to deviate from the code styles that may already be defined in these bits of code.
