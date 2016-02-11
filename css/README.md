@@ -14,7 +14,7 @@
     1. [Shorthand Properties](#shorthand-properties)
     1. [0 and Units](#0-and-units)
     1. [Leading 0s](#leading-0s)
-    1. [Hexidecimal Noation](#hexidecimal Notation)
+    1. [Hexidecimal Notation](#hexidecimal-notation)
     1. [Declaration Order](#declaration-order)
     1. [Formatting](#formatting)
     1. [Quotation Marks](#quotation-marks)
@@ -456,6 +456,6 @@ This is particularly important to instances of `position: absolute` and over use
 
 ### Consistency
 
-Be _consistent_.  When you're working on code that you didn't write, take some time to look around and determine the style of the code and adapt the changes you are making to reflect the overall style.  While it is important that these guidelines are followed for _new_ code, there is still older code to maintain and in these instances it is important not to deviate from the code styles that may already be defined in these bits of code.
+Be _consistent_.  When you're working on code that you didn't write, take some time to look around and determine the style of the code and adapt the changes you are making to reflect the overall style.  While it is important that these guidelines are followed for _new_ code, there is still older code to maintain and in these instances it is important not to deviate from the code styles that may already be defined in these older bits of code.  Do not refactor unless you have been explicity told to do so.
 
 **[⬆ back to top](#table-of-contents)**
