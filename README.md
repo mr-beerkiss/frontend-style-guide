@@ -16,10 +16,12 @@ Mostly reasonable.  Mostly stolen from AirBnB and Google.  Completely enforced.
   1.  [Indentation](#indentation)
   1.  [Trailing Whitespace](#trailing-whitespace)
   1.  [Newlines](#newlines)
+1. [Line lengths](#line-lengths)
 1. [Action Items](#actionitems)
   1.  [TODO](#todo)
   1.  [FIXME](#fixme§)
 1. [.editorconfig](#.editorconfig)
+1. [Links and more info][#links-and-more-info]
 
 ## Protocol
 
@@ -122,6 +124,17 @@ Make sure to leave a new line at the end of a file
 
 **[⬆ back to top](#table-of-contents)**
 
+## Line lengths
+
+Any line of source code should not exceed 100 characters.  The way lines should be broken is 
+dependant on the type of technology in use.  Please refer to each of the guide for more info
+on how to line break.
+
+The exception to the line length rule are links defined in markdown which may well exceed 100 
+characters.  
+
+**[⬆ back to top](#table-of-contents)**
+
 ## Action Items
 
 ### TODO
@@ -156,3 +169,19 @@ Ensure your IDE or text editor is configured to use an `.editorconfig ` file. On
 in the root of any project every work on.  
 
 More info on `.editorconfig` can be found at [their website](http://editorconfig.org/).
+
+**[⬆ back to top](#table-of-contents)**
+
+## Links and more info
+
+If you would like to round out your knowledge of front-end technologies, these links are a good 
+place to get started.
+
+- [Mozilla Developer Network](https://developer.mozilla.org/en-US/)
+- [Google Web Fundamentals](https://developers.google.com/web/fundamentals/?hl=en)
+- [HTML Rocks](http://www.html5rocks.com/en/)
+- [Can I use...](http://caniuse.com/)
+- [ECMA International](http://www.ecma-international.org/)
+- [W3C](https://www.w3.org/)
+
+**[⬆ back to top](#table-of-contents)**

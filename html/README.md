@@ -18,16 +18,20 @@
 
 ## Document Type
 
-- [1](#1) <a name="1"></a> Use HTML5, it is preferred for all HTML documents.
-`<!DOCTYPE html>`.  It is recommended that the content-type header for HTML documents is set to `text/html`.  Do not use XHTML (`application/xhtml+xml`) as it lacks both browser and infrastructure support and offers less room for optimation than HTML.
+Use HTML5 (`<!DOCTYPE html>`), it is preferred for all HTML documents.  It is recommended that the 
+content-type header for HTML documents is set to `text/html`.  Do not use XHTML 
+(`application/xhtml+xml`) as it lacks both browser and infrastructure support and offers less 
+room for optimation than HTML.
 
 **[⬆ back to top](#table-of-contents)**
 
 ## HTML Validity
 
-- [2](#2) <a name="2"></a>  Always ensure your HTML documents are valid.  You can use the [W3C HTML validator](http://validator.w3.org/nu/) to test your HTML.
+Always ensure your HTML documents are valid.  You can use the 
+[W3C HTML validator](http://validator.w3.org/nu/) to test your HTML.
 
-Using valid HTML is a measurable baseline quality attribute that contributes to learning about technical requirements and constraints, and that ensures proper HTML usage.
+Using valid HTML is a measurable baseline quality attribute that contributes to learning about 
+technical requirements and constraints, and that ensures proper HTML usage.
 
 ```html
 <!-- Bad -->
@@ -45,11 +49,13 @@ Using valid HTML is a measurable baseline quality attribute that contributes to 
 
 ## Semantics
 
-- [3](#3) <a name="3"></a> Use HTML elements (sometimes incorrectly referred to as _tags_) according to their purpose.
+Use HTML elements (sometimes incorrectly referred to as _tags_) according to their 
+[purpose](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document).
 
-For instance use `h[n]` elements for headings, `p` elements for pagagraphs, `a` elements for achors and so on.
+For instance use `<h1>` elements for page headings, `<p>` elements for paragraphs, `<a>` elements 
+for achors and so on.
 
-This is important for accessibility, reuse and code efficiency.
+This is critical for accessibility, reuse and code efficiency.
 
 ```html
 <!-- Bad -->
@@ -63,10 +69,13 @@ This is important for accessibility, reuse and code efficiency.
 
 ## Multimedia fallbacks
 
-- [4][#4] <a name="4"></a> Always offer alternative content to multimedia such as `<audio>`, `<video>`, `<img>` and `<canvas>` elements.  For `<img>` elements this means providing meaningful content to the `alt` attribute and providing transcripts, captions or descriptions for `<audio>`, `<video>` and `<canvas>` elements respectively.
+Always offer alternative content to multimedia such as `<audio>`, 
+`<video>`, `<img>` and `<canvas>` elements.  For `<img>` elements provide meaningful content to the
+`alt` attribute; provide [transcripts or captions](https://developer.mozilla.org/en-US/Apps/Build/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video) for `<audio>` and `<video>` elements; and 
+provide fallback content for the `<canvas>` element.
 
 ```html
-<!-- Bad -- >
+<!-- Bad -->
 <img src="mug.png">
 
 <!-- Good --> 
@@ -82,19 +91,26 @@ This is important for accessibility, reuse and code efficiency.
   <source src="mugs.mp4" type="video/mp4">
   <track label="English" kind="subtitles" srclang="en" src="captions/vtt/mugs-en.vtt" default>
 </video>
-```
 
-Refer to [these MDN pages](https://developer.mozilla.org/en-US/Apps/Build/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video) for more information.  
+<!-- Bad -->
+<canvas width="640" height="360"></canvas>
+
+<!-- Good -->
+<canvas width="640" height="360">
+  <img src="cavnaserror.png" alt="Your browser does not support the canvas element">
+</canvas>
+```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Separation of concerns
 
-- [5](#5) <a name="4"></a>  It is imperative to keep separate structure (markup), presentation (styling) and behaviour (scripting).  Also keep the contact area as small as possible by linking as few style sheets and scripts as possible from documents and templates.  
+It is imperative to keep separate structure (markup), presentation (styling) and behaviour (scripting).  Also keep the contact area as small as possible by linking as few style sheets and scripts as possible from documents and templates.  
 
 Sepearating structure from presentation and behaviour is critical to improve maintainability and reuse.
 
-`<style>` and `<script>` may be inlined for page load performance reasons but these should contain the absolute minimum CSS and JS needed to perform the initial page render.
+`<style>` and `<script>` may be inlined for page load performance reasons, but these should only 
+contain the absolute minimum CSS and JS needed to [perform the initial page render](https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent).
 
 ```html
 <!-- Bad -->
@@ -120,9 +136,14 @@ Sepearating structure from presentation and behaviour is critical to improve mai
 <script src="behaviour.js"></script>
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Entity References
 
-- [6](#6) <a name="6"></a>  Do not use entity references (eg. `&mdash;`, `&requo;`, `&#x263a;` etc) since the same file encoding (UTF-8) should be used consistently between teams.  The only exceptions are for characters that have special meaning in html (eg. `<` and `& `) as well as control or "invisible" characters (eg. `&nbsp;`)
+Do not use entity references (eg. `&mdash;`, `&requo;`, `&#x263a;` etc) since the same file 
+encoding should be used consistently between teams.  The only exceptions are for characters that 
+have special meaning in html (eg. `<` and `& `) as well as control or "invisible" characters 
+(eg. `&nbsp;`).
 
 ```html
 <!-- Bad -->
@@ -135,7 +156,7 @@ The currency symbol for the Euro is “€”.
 
 ## `type` Attributes
 
-- [7](#7) <a name="7"></a> Omit `type` attributes for stylesheets and scripts, unless you are not using CSS for stylesheets and Javascript for scripts.  The types `text/css` and `text/javascript` are implied in HTML5 and you only need specify the type if you wish to use something else inside those tags.  
+Omit `type` attributes for stylesheets and scripts, unless you are not using CSS for stylesheets and Javascript for scripts.  The types `text/css` and `text/javascript` are implied in HTML5 and you only need specify the type if you wish to use something else inside those tags.  
 
 The `type` attribute can be safely ommited for older browsers.
 
@@ -157,7 +178,7 @@ The `type` attribute can be safely ommited for older browsers.
 
 ## Void Elements
 
-- [8](8) <a href="8"></a> Although fine with HTML, do not void close elements.
+Do not void close elements.
 
 ```html
 <!-- Bad -->
@@ -171,9 +192,9 @@ The `type` attribute can be safely ommited for older browsers.
 
 ## HTML formatting
 
-- [8](8) <a href="9"></a> Put every block, list or table element on a new line and indent as such for every child element.  In-line elements should _not_ be placed on a new line, even for readibility purposes since new lines have special meaning in HTML.
+Put every block, list or table element on a new line and indent as such for every child element.  In-line elements should _not_ be placed on a new line, even for readibility purposes since new lines have special meaning in HTML.
 
-These rules _MUST_ be applied regardless of any styling that may change the role of an element via the `display` property.
+These rules _should_ be applied regardless of any styling that may change the role of an element via the `display` property.
 
 The only exception is to put `<li>` elements onto one line if you encounter issues with whitespace around a list.
 
@@ -230,9 +251,8 @@ The only exception is to put `<li>` elements onto one line if you encounter issu
 
 # Capitalisation
 
-- [9](9) <a href="9"></a>  All code _must_ be lowercase.  This applies to HTML element names, attributes, attribute values (unless `text/CDATA`).  Obviously this doesn't apply to the content of elements or string values.
-
-This rule applies to how CSS selectors are used to defined ids and classes.  See the [CSS section](../css) for more details.
+All html code _must_ be lowercase.  This applies to element names, attributes, attribute values 
+(unless `text/CDATA`).  Obviously this doesn't apply to the content of elements or string values.
 
 ```html
 <!--Bad -->
