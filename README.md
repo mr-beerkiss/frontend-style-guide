@@ -13,14 +13,18 @@ Mostly reasonable.  Mostly stolen from AirBnB and Google.  Completely enforced.
 1. [Protocol](#protocol)
 1. [Encoding](#indentation)
 1. [Whitespace](#whitespace)
+  1.  [Indentation](#indentation)
+  1.  [Trailing Whitespace](#trailing-whitespace)
+  1.  [Newlines](#newlines)
 1. [Action Items](#actionitems)
+  1.  [TODO](#todo)
+  1.  [FIXME](#fixme§)
 1. [.editorconfig](#.editorconfig)
 
 ## Protocol
 
-- [1](#1) <a name="1"></a> Omit the protocol (`http:`, `https:`) from URLS pointing to images and other media files,
+Omit the protocol (`http:`, `https:`) from URLs pointing to images and other media files,
 style sheets and scripts unless the respective files are not available over both protocols.  
-Although there should be a good reason why any resource should not be available over both.
 
 Omitting the protocol, which makes the url relative, prevents mixed content issues and results in
 minor file savings.
@@ -49,9 +53,9 @@ minor file savings.
 
 ## Encoding
 
-- [2](#2) <a name="2"></a> Use UTF-8 (no BOM).  Make sure your editor uses UTF-8 character encoding, without a 
-byte order mark.  Specify the encoding in HTML templates and documents via `<meta charset="utf-8">`.
-Do not specify the encoding of style sheets as these assume UTF-8.
+Make sure your editor uses UTF-8 character encoding, without a byte order mark.  Specify the 
+encoding in HTML templates and documents via `<meta charset="utf-8">`. Do not specify the encoding 
+of style sheets as these assume UTF-8.
 
 (More on encodings and when and how to specify them can be found in 
 [Handling character encodings in HTML and CSS](http://www.w3.org/International/tutorials/tutorial-char-enc/))
@@ -60,7 +64,12 @@ Do not specify the encoding of style sheets as these assume UTF-8.
 
 ## Whitepace
 
-- [3.1](#3.1) <a name="3.1"></a> Ident by 2 spaces at a time.  Do not mix tabs and spaces for indentation.
+> This section is under review.  Please do not refactor source files to 2 spaces unless you have
+> been explicity sold to do so.
+
+### Indentation
+
+Ident by 2 spaces at a time.  Do not mix tabs and spaces for indentation.
 
 ```html
 <ul>
@@ -81,7 +90,10 @@ function() {
 }
 ```
 
-- [3.2](#3.2) <a name="3.2"></a> Never leave trailing white space at the end of a line
+### Trailing whitespace
+
+Never leave trailing white space at the end of a line.
+
 ```html
 <!-- bad -->
 <p>Why would you do that?</p>   
@@ -90,13 +102,16 @@ function() {
 <p>Much better</p>
 ```
 
-- [3.3](#3.3) <a name="3.3"></a> Make sure to leave a new line at the end of a file
+### New lines
+
+Make sure to leave a new line at the end of a file
 ```javascript
 // bad
 (function() {
   myAwesomeModule();
 })();
 ```
+
 ```javascript
 // good
 (function() {
@@ -109,7 +124,7 @@ function() {
 
 ## Action Items
 
-- [4.1](#4.1) <a name="4.1"></a> Mark todos and action items with `TODO`.
+### TODO
 
 Hightlight todos by using the `TODO` keyword only, not other common formats like `@@`.
 
@@ -120,11 +135,11 @@ Append action items after a colon as in `TODO: action item`
 <center>Test</center>
 ```
 
-- [4.2](#4.2) <a name="4.2"></a>  Mark hacks, work arounds and no-essential issues with `FIXME`.
+### FIXME
+
+Mark hacks, work arounds and no-essential issues with `FIXME`.
 
 Simiarly to [todos](#4.1), hightlight fixmes with the `FIXME` keyword only.
-
-Append action items after a colon as in `FIXME: use recursive setTimeout instead of setInterval`
 
 ```javascript
 // FIXME: Use regular for loop instead of for-in
@@ -137,4 +152,7 @@ for ( k in arr ) {
 
 ## .editorconfig
 
-- [5](#5) <a name="5"></a> Make sure you IDE is configured to make use of the `.editorconfig `file which should be located in the root of any project you work on.  More info on `.editorconfig` can be found at [their website](http://editorconfig.org/).
+Ensure your IDE or text editor is configured to use an `.editorconfig ` file. One should be located 
+in the root of any project every work on.  
+
+More info on `.editorconfig` can be found at [their website](http://editorconfig.org/).
