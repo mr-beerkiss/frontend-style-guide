@@ -5,6 +5,7 @@ Mostly reasonable.  Mostly stolen from AirBnB and Google.  Completely enforced.
 ## Guides
 
 - [Javascript](javascript/)
+- [jQuery](jquery/)
 - [CSS and Sass](css/)
 - [HTML](html/)
 
@@ -118,8 +119,7 @@ Make sure to leave a new line at the end of a file
 // good
 (function() {
   myAwsomeModule();  
-})();
-↵
+})();↵
 ```
 
 **[⬆ back to top](#table-of-contents)**

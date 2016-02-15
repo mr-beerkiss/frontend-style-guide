@@ -1,4 +1,4 @@
-# Photo JavaScript Style Guide
+# Photobox JavaScript Style Guide
 
 *A mostly reasonable approach to JavaScript*
 
@@ -25,8 +25,8 @@
   1. [Accessors](#accessors)
   1. [Constructors](#constructors)
   1. [Events](#events)
+  1. [Strict Mode](#strict-mode)
   1. [Modules](#modules)
-  1. [jQuery](#jquery)
   1. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
   1. [Testing](#testing)
 
@@ -36,6 +36,8 @@
 Forked from the [AirBnB Javascript Style guide](https://github.com/airbnb/javascript).  Refer back
 to this page for the original licensing and goodies like translations, resources, links and gitter 
 chat.
+
+Additionally there are some [jQuery Best practises](../jquery) to follow.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -136,7 +138,7 @@ chat.
     var items = [];
     ```
 
-  - Use Array#push instead of direct assignment to add items to an array.
+  - Use Array.prototype.push instead of direct assignment to add items to an array.
 
     ```javascript
     var someStack = [];
@@ -149,7 +151,7 @@ chat.
     someStack.push('abracadabra');
     ```
 
-  - When you need to copy an array use Array#slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
+  - When you need to copy an array use Array.prototype.slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
     ```javascript
     var len = items.length;
@@ -165,7 +167,7 @@ chat.
     itemsCopy = items.slice();
     ```
 
-  - To convert an array-like object to an array, use Array#slice.
+  - To convert an array-like object to an array, use Array.prototype.slice.
 
     ```javascript
     function trigger() {
@@ -353,12 +355,43 @@ chat.
     var isJedi = getProp('jedi');
     ```
 
+  - Only use the `delete` keyword if you want to remove a property from an object's iterated list 
+  of keys or if you wish to change the result of `if (key in obj)`.  In modern Javascript engines,
+  changing the number of object properties is much slower than reassigning the value.  Use `null` 
+  for this.
+
+    ```javascript 
+    // bad
+    delete myObject._myValue;
+
+    // good
+    myObject._myValue = null;
+    ```
+
+  - Never assign `undefined` to a value since that is an oxymoron because you've now _defined_
+  a value to be equal to `undefined`.  If you wish to indicate that a value has been purposefully
+  uninitialised then use `null` instead.
+
+  The reason for this is largely historical, since older browsers would allow you to create a value 
+  called `undefined` and assign a value to it.  That is why a lot of IIFE modules include
+  `undefined` in their argument list to ensure `undefined` remains undefined in that module's
+  execution space.
+
+    ```javascript
+    // bad
+    myValue = undefined;
+
+    // good
+    myValue = null;
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 
 ## Variables
 
-  - Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
+  - Always use `var` to declare variables. Not doing so will result in global variables. 
+  We want to avoid polluting the global namespace! 
 
     ```javascript
     // bad
@@ -474,6 +507,34 @@ chat.
       this.setFirstName(name);
 
       return true;
+    }
+    ```
+
+  - Be careful when using `||` for assignment.  The left-hand side operand _must_ be truthy in order
+  for it to work correctly.  This can have unexpected consequences if the left hand side should 
+  accept as valid input falsy values such as 0, '', false, null or undefined.
+
+
+    ```javascript  
+    function myFunc(startTime) {
+      startTime = startTime || 100;
+
+      // do stuff
+    }
+
+    // this will be fine, startTime will be equal to 50 as you expect
+    myFunc(50);
+
+    // WAT! Why wasn't start time equal to zero? It's equal to 100!?
+    // EXACTLY.  So be careful.  If you expect fasly values to be valid inputs then either don't
+    // use || for assignment or rewrite the rule to make it truthy
+    myFunc(0);
+
+    function myFunc(startTime) {
+      // now if you pass 0 as start time it will pass a truthy check since 0 is a number.
+      startType = typeof startTime === 'number' ? startTime : 100;
+
+      // do stuff
     }
     ```
 
@@ -672,7 +733,9 @@ chat.
 
 ## Comments
 
-  - Use `/** ... */` for multi-line comments. Include a description, specify types and values for all parameters and return values.
+  - Use `/** ... */` for multi-line comments. Include a description, specify types and values for 
+  all parameters and return values.  Refer to [usejsdoc.org](http://usejsdoc.org/) on how to 
+  properly annotate multi-line comments.
 
     ```javascript
     // bad
@@ -738,26 +801,9 @@ chat.
 
 
 ## Whitespace
-
-  - Use soft tabs set to 2 spaces.
-
-    ```javascript
-    // bad
-    function() {
-    ∙∙∙∙var name;
-    }
-
-    // bad
-    function() {
-    ∙var name;
-    }
-
-    // good
-    function() {
-    ∙∙var name;
-    }
-    ```
-
+  
+  - Refer to the [General section guide](../) on white space since those rules apply here too.
+  
   - Place 1 space before the leading brace.
 
     ```javascript
@@ -816,30 +862,6 @@ chat.
 
     // good
     var x = y + 5;
-    ```
-
-  - End files with a single newline character.
-
-    ```javascript
-    // bad
-    (function(global) {
-      // ...stuff...
-    })(this);
-    ```
-
-    ```javascript
-    // bad
-    (function(global) {
-      // ...stuff...
-    })(this);↵
-    ↵
-    ```
-
-    ```javascript
-    // good
-    (function(global) {
-      // ...stuff...
-    })(this);↵
     ```
 
   - Use indentation when making long method chains. Use a leading dot, which
@@ -991,7 +1013,8 @@ chat.
 
 ## Semicolons
 
-  - **Yup.**
+  - **ALWAYS.**  Relying on implicit insertion can cause subtle and hard to debug problems.
+  Don't be [weird about it](https://docs.npmjs.com/misc/coding-style#semicolons).
 
     ```javascript
     // bad
@@ -1013,7 +1036,8 @@ chat.
     })();
     ```
 
-    [Read more](http://stackoverflow.com/a/7365214/1712802).
+    Read more [here](https://google.github.io/styleguide/javascriptguide.xml#Semicolons) and 
+    [here](http://stackoverflow.com/a/7365214/1712802).
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -1164,7 +1188,12 @@ chat.
     this._firstName = 'Panda';
     ```
 
-  - When saving a reference to `this` use `_this`.
+  - When saving a reference to `this` use `_this`.  Try to avoid doing this however, since you
+  are caching a large object which might lead to performance issues; and you are masking the
+  issue of not understanding the meaning of `this` in Javascript.  Either 
+  [`bind`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind) 
+  this to the scope you expect it in or better yet, use a closures to cache the variables you care 
+  about.
 
     ```javascript
     // bad
@@ -1207,25 +1236,6 @@ chat.
     ```
 
   - **Note:** IE8 and below exhibit some quirks with named function expressions.  See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
-
-  - If your file exports a single class, your filename should be exactly the name of the class.
-    ```javascript
-    // file contents
-    class CheckBox {
-      // ...
-    }
-    module.exports = CheckBox;
-
-    // in some other file
-    // bad
-    var CheckBox = require('./checkBox');
-
-    // bad
-    var CheckBox = require('./check_box');
-
-    // good
-    var CheckBox = require('./CheckBox');
-    ```
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -1314,6 +1324,28 @@ chat.
     };
     ```
 
+  - Always pass a construct an object for initialisation instead of relying on a parameter list.
+  Using a object means your initialisation properties are _named_ which makes it easier to understand
+  and it also makes it easier to extend the constructor at a later date.  Remember Javascript 
+  functions cannot be [overloaded](https://en.wikipedia.org/wiki/Function_overloading) so you can
+  only ever have one contructor per object.
+
+    ```javascript
+    // bad
+    var MyObject = function(value1, value2, value3) {
+      this.value1 = value1;
+      this.value2 = value2;
+      this.vaule3 = value3;
+    };
+
+    // good
+    var MyObject = function(config) {
+      this.value1 = config.value1;
+      this.value2 = config.value2;
+      this.value3 = config.value3;
+    };
+    ```
+
   - Methods can return `this` to help with method chaining.
 
     ```javascript
@@ -1399,6 +1431,11 @@ chat.
 
   **[⬆ back to top](#table-of-contents)**
 
+## Strict Mode
+
+  - [Strict Mode](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Strict_mode) should
+   be enabled on every source file by applying the string `'use string;'` to the first line of 
+   any file.  The exception to this is when you are exporting a [module](#modules).
 
 ## Modules
 
@@ -1426,68 +1463,6 @@ chat.
 
       global.FancyInput = FancyInput;
     }(this);
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-
-## jQuery
-
-  - Prefix jQuery object variables with a `$`.
-
-    ```javascript
-    // bad
-    var sidebar = $('.sidebar');
-
-    // good
-    var $sidebar = $('.sidebar');
-    ```
-
-  - Cache jQuery lookups.
-
-    ```javascript
-    // bad
-    function setSidebar() {
-      $('.sidebar').hide();
-
-      // ...stuff...
-
-      $('.sidebar').css({
-        'background-color': 'pink'
-      });
-    }
-
-    // good
-    function setSidebar() {
-      var $sidebar = $('.sidebar');
-      $sidebar.hide();
-
-      // ...stuff...
-
-      $sidebar.css({
-        'background-color': 'pink'
-      });
-    }
-    ```
-
-  - For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
-  - Use `find` with scoped jQuery object queries.
-
-    ```javascript
-    // bad
-    $('ul', '.sidebar').hide();
-
-    // bad
-    $('.sidebar').find('ul').hide();
-
-    // good
-    $('.sidebar ul').hide();
-
-    // good
-    $('.sidebar > ul').hide();
-
-    // good
-    $sidebar.find('ul').hide();
     ```
 
 **[⬆ back to top](#table-of-contents)**
