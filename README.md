@@ -72,24 +72,24 @@ of style sheets as these assume UTF-8.
 
 ### Indentation
 
-Ident by 2 spaces at a time.  Do not mix tabs and spaces for indentation.
+Ident by 4 spaces at a time.  Do not mix tabs and spaces for indentation.
 
 ```html
 <ul>
-  <li>Good</li>
-  <li>Job</li>
+    <li>Good</li>
+    <li>Job</li>
 </ul>
 ```
 
 ```css
 .example {
-  color: green;
+    color: green;
 } 
 ```
 
 ```js
 function() {
-  return 'Excellent';
+    return 'Excellent';
 }
 ```
 
