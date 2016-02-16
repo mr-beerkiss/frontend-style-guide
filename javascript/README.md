@@ -1434,7 +1434,7 @@ Additionally there are some [jQuery Best practises](../jquery) to follow.
 ## Strict Mode
 
   - [Strict Mode](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Strict_mode) should
-   be enabled on every source file by applying the string `'use string;'` to the first line of 
+   be enabled on every source file by applying the string `'use strict';` to the first line of 
    any file.  The exception to this is when you are exporting a [module](#modules).
 
 ## Modules
