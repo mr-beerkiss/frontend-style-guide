@@ -152,22 +152,22 @@ dog.set('attr', {
 ```css
 /* Bad */
 .oval {
-  width                 : 15em,
-  height                : 5em,
-  color                 : #bad,
-  border-radius         : 5px,
-  -moz-border-radius    : 5px,
-  -webkit-border-radius : 5px
+  width                 : 15em;
+  height                : 5em;
+  color                 : #bad;
+  border-radius         : 5px;
+  -moz-border-radius    : 5px;
+  -webkit-border-radius : 5px;
 }
 
 /* Good */
 .oval {
-  width: 15em,
-  height: 5em,
-  color: #bad,
-  border-radius: 5px,
-  -moz-border-radius: 5px,
-  -webkit-border-radius: 5px
+  width: 15em;
+  height: 5em;
+  color: #bad;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 ```
 
