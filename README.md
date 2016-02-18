@@ -17,6 +17,7 @@ Mostly reasonable.  Mostly stolen from AirBnB and Google.  Completely enforced.
   1.  [Indentation](#indentation)
   1.  [Trailing Whitespace](#trailing-whitespace)
   1.  [Newlines](#newlines)
+  1.  [Assignment Alignment](#assignment-alignment)
 1. [Line lengths](#line-lengths)
 1. [Action Items](#actionitems)
   1.  [TODO](#todo)
@@ -121,6 +122,55 @@ Make sure to leave a new line at the end of a file
   myAwsomeModule();  
 })();↵
 ```
+
+### Assignment Alignment
+
+Avoid taking unnecessary steps to align assignment blocks.  They create unnecessary amounts of 
+whitespace.  Worse, it means if you add a property with a longer name all other properties need to
+be realigned which will result in white-space heavy diffs.  
+
+```javascript
+// bad
+dog.set('attr', {
+  age         : 1,
+  colors      : ['white', 'black', 'tan'],
+  breed       : 'Bernese Mountain Dog',
+  temperament : ['loyal', 'faithful', 'intelligent', 'affectionate'],
+  lifeSpan    : [6, 8]
+});
+
+// good
+dog.set('attr', {
+  age: 1,
+  colors: ['white', 'black', 'tan'],
+  breed: 'Bernese Mountain Dog',
+  temperament: ['loyal', 'faithful', 'intelligent', 'affectionate'],
+  lifeSpan: [6, 8]
+});
+```
+
+```css
+/* Bad */
+.oval {
+  width                 : 15em,
+  height                : 5em,
+  color                 : #bad,
+  border-radius         : 5px,
+  -moz-border-radius    : 5px,
+  -webkit-border-radius : 5px
+}
+
+/* Good */
+.oval {
+  width: 15em,
+  height: 5em,
+  color: #bad,
+  border-radius: 5px,
+  -moz-border-radius: 5px,
+  -webkit-border-radius: 5px
+}
+```
+
 
 **[⬆ back to top](#table-of-contents)**
 
